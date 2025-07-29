@@ -2,87 +2,117 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>TalentSage – Resume Evaluator</title>
+  <title>🚀 TalentSage – Resume Fit Checker</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
   <style>
     body {
-      background: linear-gradient(to right, #f8f9fa, #e9ecef);
+      background: linear-gradient(to right, #f1f3f5, #e9ecef);
       font-family: 'Segoe UI', sans-serif;
+      color: #343a40;
+    }
+    .card-style {
+      background: #ffffffcc;
+      backdrop-filter: blur(6px);
+      border-radius: 1rem;
+      box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+      transition: all 0.3s ease;
+    }
+    .card-style:hover {
+      transform: translateY(-4px);
     }
     .fade-in {
-      animation: fadeIn 0.8s ease-in-out;
+      animation: fadeIn 0.7s ease-in-out;
     }
     @keyframes fadeIn {
-      from {opacity: 0; transform: translateY(20px);}
-      to {opacity: 1; transform: translateY(0);}
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
     }
-    .card-result {
-      border-left: 5px solid #0d6efd;
+    .btn-custom {
+      background-color: #343a40;
+      color: white;
+      border-radius: 2rem;
+    }
+    .btn-custom:hover {
+      background-color: #212529;
+    }
+    .emoji-badge {
+      font-size: 1.1rem;
+      margin-right: 6px;
+    }
+    .list-group-item {
+      border: none;
+      background-color: transparent;
+      padding-left: 0;
+    }
+    .highlight {
+      font-weight: bold;
+      color: #198754;
     }
   </style>
 </head>
 <body>
 
 <div class="container py-5">
-  <div class="text-center mb-5">
-    <h2 class="fw-bold">TalentSage – Resume Fit Checker</h2>
-    <p class="text-muted">Upload your resume and see how well it matches your dream role!</p>
+  <div class="text-center fade-in mb-4">
+    <h1 class="fw-bold">🎯 TalentSage</h1>
+    <p class="text-muted fs-5">Your smart assistant to check if your resume fits the job! 🧠📄</p>
   </div>
 
   <div class="row justify-content-center">
-    <div class="col-md-8">
-      <form method="post" enctype="multipart/form-data" class="card p-4 shadow-sm fade-in">
+    <div class="col-md-8 col-lg-6">
+      <form method="post" enctype="multipart/form-data" class="p-4 card-style fade-in">
         <div class="mb-3">
-          <label for="resume" class="form-label">Upload Resume (PDF)</label>
-          <input class="form-control" type="file" name="resume" id="resume" accept=".pdf" required>
+          <label for="resume" class="form-label">📎 Upload Your Resume</label>
+          <input class="form-control rounded-pill" type="file" name="resume" id="resume" accept=".pdf" required>
         </div>
         <div class="mb-3">
-          <label for="position" class="form-label">Job Position</label>
-          <input type="text" class="form-control" name="position" id="position" placeholder="e.g., Machine Learning Engineer" required>
+          <label for="position" class="form-label">💼 Job Role You're Aiming For</label>
+          <input type="text" class="form-control rounded-pill" name="position" id="position" placeholder="e.g., Machine Learning Engineer" required>
         </div>
-        <button type="submit" class="btn btn-primary w-100">Evaluate Resume</button>
+        <button type="submit" class="btn btn-custom w-100 mt-2">🚀 Check My Fit</button>
       </form>
     </div>
   </div>
 
   {% if result %}
   <div class="row justify-content-center mt-5 fade-in">
-    <div class="col-md-10">
-      <div class="card p-4 shadow-sm card-result">
-        <h4 class="mb-3">Evaluation Result</h4>
+    <div class="col-md-10 col-lg-8">
+      <div class="card-style p-4">
+        <h3 class="mb-3">📊 Evaluation Result</h3>
         
         {% if result.decision %}
-          <h5 class="mb-3">
-            Decision: 
-            <span class="badge bg-{{ 'success' if result.decision == 'yes' else 'danger' }} text-uppercase">
-              {{ result.decision }}
-            </span>
-          </h5>
+          <p class="fs-5">✅ <span class="fw-semibold">Decision:</span>
+            <span class="highlight">{{ result.decision | upper }}</span>
+          </p>
         {% endif %}
 
         {% if result.summary %}
-          <h6 class="text-muted mt-3">Summary</h6>
+          <h5 class="mt-4 mb-2">📝 Summary</h5>
           <p>{{ result.summary }}</p>
         {% endif %}
 
         {% if result.suggestions %}
-          <h6 class="text-muted mt-4">Suggestions</h6>
+          <h5 class="mt-4 mb-2">🔧 Suggestions to Improve</h5>
           <ul class="list-group list-group-flush">
             {% for suggestion in result.suggestions %}
-              <li class="list-group-item"><i class="fa fa-lightbulb text-warning me-2"></i>{{ suggestion }}</li>
+              <li class="list-group-item">💡 {{ suggestion }}</li>
             {% endfor %}
           </ul>
         {% endif %}
 
         {% if result.error %}
-          <div class="alert alert-danger mt-3">{{ result.error }}</div>
+          <div class="alert alert-danger mt-4">❗ {{ result.error }}</div>
         {% endif %}
       </div>
     </div>
   </div>
   {% endif %}
 </div>
+
+<footer class="text-center text-muted mt-5 small">
+  Made with ❤️ by TalentSage Team
+</footer>
 
 </body>
 </html>
