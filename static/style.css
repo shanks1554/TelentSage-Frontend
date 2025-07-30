@@ -1,0 +1,25 @@
+body {
+  background-color: #f8f9fa;
+}
+
+h1, h2 {
+  font-weight: 700;
+}
+
+.card {
+  border-radius: 1rem;
+}
+
+#loading-screen {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 9999;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(255, 255, 255, 0.9);
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
