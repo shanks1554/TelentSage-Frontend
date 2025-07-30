@@ -23,3 +23,14 @@ h1, h2 {
   align-items: center;
   flex-direction: column;
 }
+
+@media (max-width: 576px) {
+  body {
+    font-size: 0.95rem;
+  }
+
+  .container {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+}
